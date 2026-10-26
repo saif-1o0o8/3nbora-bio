@@ -150,7 +150,7 @@
             }
         }
 
-        /* أنيميشن توهج الروابط الجديد */
+        /* أنيميشن توهج الروابط المستمر */
         @keyframes border-pulse {
             0% {
                 box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.3),
@@ -337,7 +337,6 @@
             position: relative;
             overflow: hidden;
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
-
             /* دمج أنيميشن الدخول مع أنيميشن النبض المستمر */
             animation: fade-in-up 0.6s ease-out backwards, border-pulse 2.5s infinite ease-in-out;
         }
@@ -562,7 +561,7 @@
             color: var(--text-main);
         }
 
-        /* ================= FOOTER ================= */
+        /* ================= FOOTER & DEV SIGNATURE ================= */
         footer {
             text-align: center;
             margin-top: 3rem;
@@ -600,6 +599,21 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             font-weight: 500;
+        }
+
+        /* تنسيق اسم المطور (SX CODE) */
+        .developer-name {
+            color: var(--primary-red);
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--primary-red-glow);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .developer-name:hover {
+            color: #fff;
+            text-shadow: 0 0 15px var(--primary-red), 0 0 30px var(--primary-red);
+            transform: scale(1.05);
         }
 
         /* Ripple Effect */
@@ -789,7 +803,11 @@
                 <a href="https://tiktok.com/@3nboora" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="https://instagram.com/3nbora" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
-            <p class="footer-text">MADE WITH ❤️ FOR THE 3NBORA FAMILY | BY SX CODE</p>
+
+            <p class="footer-text" dir="ltr">MADE WITH ❤️ FOR THE 3NBORA FAMILY | BY <a
+                    href="https://www.facebook.com/share/1AGQipuHAd/" target="_blank" rel="noopener noreferrer"
+                    class="developer-name" title="Visit Developer">SX CODE</a></p>
+
             <p class="footer-text" style="margin-top: 5px;">© 2026 3NBORA | جميع الحقوق محفوظة</p>
         </footer>
 
