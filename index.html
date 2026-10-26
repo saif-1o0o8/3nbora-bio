@@ -94,6 +94,19 @@
             }
         }
 
+        /* أنيميشن التحريك المستمر للإطارات والأزرار */
+        @keyframes float-action {
+
+            0%,
+            100% {
+                translate: 0 0px;
+            }
+
+            50% {
+                translate: 0 -6px;
+            }
+        }
+
         @keyframes neon-pulse-profile {
             0% {
                 box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
@@ -193,6 +206,7 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
+            animation: float-action 4s infinite ease-in-out;
         }
 
         .share-btn:hover,
@@ -200,6 +214,8 @@
             background: var(--glass-hover);
             color: var(--primary-red);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            translate: 0 -3px;
+            animation-play-state: paused;
         }
 
         .share-btn:active {
@@ -282,14 +298,15 @@
         .btn-primary {
             background-color: var(--primary-red);
             color: white;
-            animation: btn-pulse 2s infinite ease-in-out;
+            animation: btn-pulse 2s infinite ease-in-out, float-action 3s infinite ease-in-out;
         }
 
         .btn-primary:hover,
         .btn-primary:focus {
             background-color: #ff1a26;
             animation: none;
-            transform: translateY(-3px) scale(1.05);
+            translate: 0 -3px;
+            transform: scale(1.05);
             box-shadow: 0 10px 30px var(--primary-red-glow), 0 0 15px var(--primary-red);
         }
 
@@ -302,14 +319,15 @@
             color: white;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
-            animation: btn-secondary-pulse 2.5s infinite ease-in-out;
+            animation: btn-secondary-pulse 2.5s infinite ease-in-out, float-action 3.5s infinite ease-in-out;
         }
 
         .btn-secondary:hover,
         .btn-secondary:focus {
             background: var(--glass-hover);
             animation: none;
-            transform: translateY(-3px) scale(1.05);
+            translate: 0 -3px;
+            transform: scale(1.05);
             border-color: rgba(255, 255, 255, 0.4);
             box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
         }
@@ -337,8 +355,8 @@
             position: relative;
             overflow: hidden;
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
-            /* دمج أنيميشن الدخول مع أنيميشن النبض المستمر */
-            animation: fade-in-up 0.6s ease-out backwards, border-pulse 2.5s infinite ease-in-out;
+            /* دمج أنيميشن الدخول مع أنيميشن النبض المستمر وتحريك الإطارات */
+            animation: fade-in-up 0.6s ease-out backwards, border-pulse 2.5s infinite ease-in-out, float-action 4s infinite ease-in-out;
         }
 
         /* توقيت دخول الكروت */
@@ -373,14 +391,13 @@
         .link-card:hover,
         .link-card:focus {
             background: rgba(40, 40, 45, 0.95);
-            /* استخدام !important لتخطي الأنيميشن عند تمرير الماوس وإظهار أعلى توهج */
             box-shadow: 0 0 35px rgba(var(--platform-color-rgb), 0.9),
                 inset 0 0 20px rgba(var(--platform-color-rgb), 0.4) !important;
             border-color: rgba(var(--platform-color-rgb), 1) !important;
-            transform: translateY(-3px) !important;
+            translate: 0 -6px !important;
             z-index: 10;
             outline: none;
-            /* إيقاف النبض أثناء تمرير الماوس */
+            /* إيقاف النبض والحركة أثناء تمرير الماوس */
             animation-play-state: paused;
         }
 
@@ -498,9 +515,9 @@
             overflow: hidden;
             --platform-color-rgb: 229, 9, 20;
 
-            /* توهج كروت الميزات */
+            /* توهج كروت الميزات وحركتها */
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
-            animation: border-pulse 2.5s infinite ease-in-out;
+            animation: border-pulse 2.5s infinite ease-in-out, float-action 3.5s infinite ease-in-out;
         }
 
         .feature-card:hover,
@@ -509,7 +526,7 @@
             box-shadow: 0 0 35px rgba(var(--platform-color-rgb), 0.9),
                 inset 0 0 20px rgba(var(--platform-color-rgb), 0.4) !important;
             border-color: rgba(var(--platform-color-rgb), 1) !important;
-            transform: translateY(-3px) !important;
+            translate: 0 -6px !important;
             z-index: 5;
             outline: none;
             animation-play-state: paused;
