@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3nbora | محمود عبدالعزيز</title>
+    <title>3NBORA</title>
 
     <!-- SEO & Open Graph Tags -->
     <meta name="description"
-        content="أهلاً بيك في عالم 3nbora 🔥 كل لينكاتي ومحتوايا في مكان واحد. PUBG Mobile Creator.">
-    <meta property="og:title" content="3nbora - Link in Bio">
-    <meta property="og:description" content="الروابط الرسمية لصانع المحتوى 3nbora">
+        content="أهلاً بيك في عالم 3NBORA 🔥 كل لينكاتي ومحتوايا في مكان واحد. PUBG Mobile Creator.">
+    <meta property="og:title" content="3NBORA - Link in Bio">
+    <meta property="og:description" content="الروابط الرسمية لصانع المحتوى 3NBORA">
     <meta property="og:image" content="1000269841.jpg">
     <meta name="theme-color" content="#111111">
 
@@ -31,9 +31,9 @@
             --accent-gold: #ffb703;
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-hover: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.15);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
@@ -47,7 +47,6 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
@@ -55,9 +54,13 @@
             flex-direction: column;
             align-items: center;
             overflow-x: hidden;
+            background-color: var(--bg-color);
             background-image:
-                radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 50% 100%, rgba(255, 183, 3, 0.05) 0%, transparent 50%);
+                linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)),
+                url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .container {
@@ -73,6 +76,7 @@
         a {
             text-decoration: none;
             color: inherit;
+            outline: none;
         }
 
         /* ================= ANIMATIONS ================= */
@@ -90,7 +94,7 @@
             }
         }
 
-        @keyframes neon-pulse {
+        @keyframes neon-pulse-profile {
             0% {
                 box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
             }
@@ -101,6 +105,84 @@
 
             100% {
                 box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
+            }
+        }
+
+        @keyframes btn-pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
+                transform: scale(1.02);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+            }
+        }
+
+        @keyframes btn-secondary-pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+                transform: scale(1.02);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @keyframes card-pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(var(--platform-color-rgb), 0.2);
+                border-color: rgba(var(--platform-color-rgb), 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.6);
+                border-color: rgba(var(--platform-color-rgb), 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(var(--platform-color-rgb), 0.2);
+                border-color: rgba(var(--platform-color-rgb), 0.3);
+            }
+        }
+
+        @keyframes card-pulse-hover {
+            0% {
+                box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.6);
+                border-color: rgb(var(--platform-color-rgb));
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(var(--platform-color-rgb), 0.9);
+                border-color: rgb(var(--platform-color-rgb));
+            }
+
+            100% {
+                box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.6);
+                border-color: rgb(var(--platform-color-rgb));
+            }
+        }
+
+        @keyframes icon-pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
             }
         }
 
@@ -116,18 +198,10 @@
             }
         }
 
-        /* Accessibility: Reduce Motion */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-
         /* ================= HERO SECTION ================= */
         .hero {
             text-align: center;
-            animation: fade-in-up 0.8s ease-out;
+            animation: fade-in-up 0.8s ease-out both;
             position: relative;
         }
 
@@ -148,9 +222,16 @@
             transition: var(--transition);
         }
 
-        .share-btn:hover {
+        .share-btn:hover,
+        .share-btn:focus {
             background: var(--glass-hover);
             color: var(--primary-red);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .share-btn:active {
+            transform: scale(0.9);
+            background: var(--glass-hover);
         }
 
         .profile-pic-container {
@@ -160,7 +241,7 @@
             border-radius: 50%;
             padding: 4px;
             background: linear-gradient(45deg, var(--primary-red), var(--accent-gold));
-            animation: float 4s ease-in-out infinite, neon-pulse 3s infinite;
+            animation: float 4s ease-in-out infinite, neon-pulse-profile 3s infinite;
         }
 
         .profile-pic {
@@ -179,18 +260,13 @@
             margin-bottom: 0.2rem;
         }
 
-        .real-name {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
         .brand-name {
             font-size: 2.2rem;
             font-weight: 800;
             background: linear-gradient(to right, #fff, #ddd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
         }
 
         .verified-badge {
@@ -206,14 +282,15 @@
 
         .hero-ctas {
             display: flex;
+            flex-direction: column;
             gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn-primary,
         .btn-secondary {
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 2rem;
             border-radius: 30px;
             font-weight: 700;
             font-size: 1rem;
@@ -225,18 +302,26 @@
             border: none;
             position: relative;
             overflow: hidden;
+            width: 80%;
+            justify-content: center;
         }
 
         .btn-primary {
             background-color: var(--primary-red);
             color: white;
-            box-shadow: 0 4px 15px var(--primary-red-glow);
+            animation: btn-pulse 2s infinite ease-in-out;
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover,
+        .btn-primary:focus {
             background-color: #ff1a26;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--primary-red-glow);
+            animation: none;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px var(--primary-red-glow), 0 0 15px var(--primary-red);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
         }
 
         .btn-secondary {
@@ -244,11 +329,20 @@
             color: white;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
+            animation: btn-secondary-pulse 2.5s infinite ease-in-out;
         }
 
-        .btn-secondary:hover {
+        .btn-secondary:hover,
+        .btn-secondary:focus {
             background: var(--glass-hover);
-            transform: translateY(-2px);
+            animation: none;
+            transform: translateY(-3px) scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.95);
         }
 
         /* ================= SOCIAL LINKS ================= */
@@ -259,8 +353,7 @@
         }
 
         .link-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: rgba(25, 25, 30, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 1rem 1.5rem;
@@ -268,46 +361,57 @@
             align-items: center;
             justify-content: space-between;
             transition: var(--transition);
-            animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0;
+            /* تم التعديل هنا لحل مشكلة اختفاء الروابط */
+            animation: fade-in-up 0.8s ease-out both, card-pulse 2.5s infinite alternate;
+            opacity: 1;
             position: relative;
             overflow: hidden;
+            border: 2px solid transparent;
         }
 
-        /* Delay animations for links */
         .link-card:nth-child(1) {
-            animation-delay: 0.1s;
+            animation-delay: 0.1s, 0s;
         }
 
         .link-card:nth-child(2) {
-            animation-delay: 0.2s;
+            animation-delay: 0.2s, 0s;
         }
 
         .link-card:nth-child(3) {
-            animation-delay: 0.3s;
+            animation-delay: 0.3s, 0s;
         }
 
         .link-card:nth-child(4) {
-            animation-delay: 0.4s;
+            animation-delay: 0.4s, 0s;
         }
 
         .link-card:nth-child(5) {
-            animation-delay: 0.5s;
+            animation-delay: 0.5s, 0s;
         }
 
         .link-card:nth-child(6) {
-            animation-delay: 0.6s;
+            animation-delay: 0.6s, 0s;
         }
 
         .link-card:nth-child(7) {
-            animation-delay: 0.7s;
+            animation-delay: 0.7s, 0s;
         }
 
-        .link-card:hover {
-            transform: scale(1.02);
-            background: var(--glass-hover);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .link-card:hover,
+        .link-card:focus {
+            background: rgba(40, 40, 45, 0.95);
+            animation: card-pulse-hover 1.5s infinite alternate;
+            z-index: 10;
+            outline: none;
+            opacity: 1;
+            /* تأكيد الشفافية */
+        }
+
+        .link-card:active {
+            transform: scale(0.98);
+            animation: card-pulse-hover 0.5s infinite alternate;
+            opacity: 1;
+            /* تأكيد الشفافية */
         }
 
         .link-content {
@@ -325,13 +429,19 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(var(--platform-color-rgb), 0.15);
+            color: rgb(var(--platform-color-rgb));
             transition: var(--transition);
+            animation: icon-pulse 2s infinite ease-in-out;
         }
 
-        .link-card:hover .link-icon {
-            background: var(--primary-red);
+        .link-card:hover .link-icon,
+        .link-card:focus .link-icon,
+        .link-card:active .link-icon {
+            background: rgb(var(--platform-color-rgb));
             color: white;
+            animation: none;
+            box-shadow: 0 0 15px rgb(var(--platform-color-rgb));
         }
 
         .link-text {
@@ -342,21 +452,40 @@
         .link-title {
             font-weight: 700;
             font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .link-card:hover .link-title,
+        .link-card:focus .link-title,
+        .link-card:active .link-title {
+            color: rgb(var(--platform-color-rgb));
+            text-shadow: 0 0 8px rgba(var(--platform-color-rgb), 0.5);
         }
 
         .link-subtitle {
             font-size: 0.85rem;
             color: var(--text-muted);
-        }
-
-        .link-arrow {
-            color: var(--text-muted);
             transition: var(--transition);
         }
 
-        .link-card:hover .link-arrow {
+        .link-card:hover .link-subtitle,
+        .link-card:focus .link-subtitle,
+        .link-card:active .link-subtitle {
             color: var(--text-main);
-            transform: translateX(-5px);
+        }
+
+        .link-arrow {
+            color: rgb(var(--platform-color-rgb));
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .link-card:hover .link-arrow,
+        .link-card:focus .link-arrow,
+        .link-card:active .link-arrow {
+            opacity: 1;
+            text-shadow: 0 0 10px rgb(var(--platform-color-rgb));
         }
 
         /* ================= FEATURED CONTENT ================= */
@@ -367,8 +496,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0;
+            animation: fade-in-up 0.8s ease-out both;
             animation-delay: 0.8s;
         }
 
@@ -376,50 +504,87 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0;
+            animation: fade-in-up 0.8s ease-out both;
             animation-delay: 0.9s;
         }
 
         .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: rgba(25, 25, 30, 0.8);
+            border: 2px solid transparent;
             border-radius: 16px;
             padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            gap: 0.5rem;
             transition: var(--transition);
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            animation: card-pulse 3s infinite alternate;
+            --platform-color-rgb: 229, 9, 20;
+            opacity: 1;
+            /* تأكيد الشفافية */
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: var(--glass-hover);
-            border-color: var(--primary-red);
-            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.1);
+        .feature-card:hover,
+        .feature-card:focus {
+            background: rgba(40, 40, 45, 0.95);
+            animation: card-pulse-hover 1.5s infinite alternate;
+            z-index: 5;
+            outline: none;
+            opacity: 1;
+        }
+
+        .feature-card:active {
+            transform: scale(0.95);
+            animation: card-pulse-hover 0.5s infinite alternate;
+            opacity: 1;
         }
 
         .feature-icon {
             font-size: 2rem;
             color: var(--primary-red);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             transition: var(--transition);
+            animation: icon-pulse 2.5s infinite ease-in-out;
         }
 
-        .feature-card:hover .feature-icon {
+        .feature-card:hover .feature-icon,
+        .feature-card:focus .feature-icon,
+        .feature-card:active .feature-icon {
+            animation: none;
+            color: rgb(var(--platform-color-rgb));
+            text-shadow: 0 0 15px rgb(var(--platform-color-rgb));
             transform: scale(1.1);
         }
 
         .feature-title {
             font-weight: 700;
             font-size: 1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-title,
+        .feature-card:focus .feature-title,
+        .feature-card:active .feature-title {
+            color: var(--primary-red);
+            text-shadow: 0 0 8px rgba(var(--platform-color-rgb), 0.5);
         }
 
         .feature-desc {
             font-size: 0.8rem;
             color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-desc,
+        .feature-card:focus .feature-desc,
+        .feature-card:active .feature-desc {
+            color: var(--text-main);
         }
 
         /* ================= FOOTER ================= */
@@ -427,8 +592,7 @@
             text-align: center;
             margin-top: 3rem;
             padding-bottom: 2rem;
-            animation: fade-in-up 0.8s ease-out forwards;
-            opacity: 0;
+            animation: fade-in-up 0.8s ease-out both;
             animation-delay: 1s;
         }
 
@@ -443,11 +607,18 @@
             color: var(--text-muted);
             font-size: 1.2rem;
             transition: var(--transition);
+            outline: none;
         }
 
-        .footer-socials a:hover {
+        .footer-socials a:hover,
+        .footer-socials a:focus {
             color: var(--primary-red);
-            transform: translateY(-3px);
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--primary-red-glow);
+        }
+
+        .footer-socials a:active {
+            transform: scale(0.9);
         }
 
         .footer-text {
@@ -456,13 +627,14 @@
             font-weight: 500;
         }
 
-        /* Ripple Effect Class */
+        /* Ripple Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
             animation: ripple-anim 0.6s linear;
             background-color: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
         }
 
         @keyframes ripple-anim {
@@ -484,22 +656,18 @@
                 <i class="fa-solid fa-share-nodes"></i>
             </button>
 
-            <!-- هنا تضع مسار الصورة الشخصية، قمت باستخدام اسم الصورة المرفقة -->
             <div class="profile-pic-container">
-                <img src="image.jpg" alt="3nbora Profile" class="profile-pic"
-                    onerror="this.src='https://via.placeholder.com/130?text=3nbora'">
+                <img src="image.jpg" alt="3NBORA Profile" class="profile-pic"
+                    onerror="this.src='https://via.placeholder.com/130?text=3NBORA'">
             </div>
 
-            <p class="real-name">محمود عبدالعزيز</p>
-
             <div class="name-wrapper">
-                <h1 class="brand-name">3nbora</h1>
-                <!-- علامة التوثيق / الكريتور -->
+                <h1 class="brand-name">3NBORA</h1>
                 <i class="fa-solid fa-circle-check verified-badge" title="Gaming Creator"></i>
             </div>
 
             <p class="bio">
-                أهلاً بيك في عالم 3nbora 🔥<br>
+                أهلاً بيك في عالم 3NBORA 🔥<br>
                 PUBG Mobile Creator | Gaming | Highlights
             </p>
 
@@ -519,7 +687,8 @@
         <section class="links-section">
 
             <!-- YouTube -->
-            <a href="YOUR_YOUTUBE_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+            <a href="YOUR_YOUTUBE_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
+                style="--platform-color-rgb: 255, 0, 0;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-youtube"></i></div>
                     <div class="link-text">
@@ -530,10 +699,11 @@
                 <i class="fa-solid fa-chevron-left link-arrow"></i>
             </a>
 
-            <!-- Kick / Live Stream (من الصورة المرفقة) -->
-            <a href="https://kick.com/3nbora" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+            <!-- Kick -->
+            <a href="https://kick.com/3nbora" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
+                style="--platform-color-rgb: 83, 245, 24;">
                 <div class="link-content">
-                    <div class="link-icon" style="color:#53f518"><i class="fa-brands fa-kickstarter-k"></i></div>
+                    <div class="link-icon"><i class="fa-brands fa-kickstarter-k"></i></div>
                     <div class="link-text">
                         <span class="link-title">Kick Live</span>
                         <span class="link-subtitle">ادخل معايا اللايف 🔴</span>
@@ -542,9 +712,9 @@
                 <i class="fa-solid fa-chevron-left link-arrow"></i>
             </a>
 
-            <!-- TikTok (من الصورة المرفقة: 3nboora) -->
-            <a href="https://tiktok.com/@3nboora" target="_blank" rel="noopener noreferrer"
-                class="link-card ripple-btn">
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@3nboora" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
+                style="--platform-color-rgb: 0, 242, 254;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-tiktok"></i></div>
                     <div class="link-text">
@@ -555,9 +725,9 @@
                 <i class="fa-solid fa-chevron-left link-arrow"></i>
             </a>
 
-            <!-- Instagram (من الصورة المرفقة: 3nbora) -->
+            <!-- Instagram -->
             <a href="https://instagram.com/3nbora" target="_blank" rel="noopener noreferrer"
-                class="link-card ripple-btn">
+                class="link-card ripple-btn" style="--platform-color-rgb: 225, 48, 108;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-instagram"></i></div>
                     <div class="link-text">
@@ -569,7 +739,8 @@
             </a>
 
             <!-- Facebook -->
-            <a href="YOUR_FACEBOOK_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+            <a href="YOUR_FACEBOOK_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
+                style="--platform-color-rgb: 24, 119, 242;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-facebook-f"></i></div>
                     <div class="link-text">
@@ -581,21 +752,23 @@
             </a>
 
             <!-- Discord -->
-            <a href="YOUR_DISCORD_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+            <a href="YOUR_DISCORD_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
+                style="--platform-color-rgb: 88, 101, 242;">
                 <div class="link-content">
-                    <div class="link-icon" style="color:#5865F2"><i class="fa-brands fa-discord"></i></div>
+                    <div class="link-icon"><i class="fa-brands fa-discord"></i></div>
                     <div class="link-text">
                         <span class="link-title">Discord Server</span>
-                        <span class="link-subtitle">انضم لعيلة 3nbora 🎮</span>
+                        <span class="link-subtitle">انضم لعيلة 3NBORA 🎮</span>
                     </div>
                 </div>
                 <i class="fa-solid fa-chevron-left link-arrow"></i>
             </a>
 
             <!-- WhatsApp -->
-            <a href="YOUR_WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+            <a href="YOUR_WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
+                style="--platform-color-rgb: 37, 211, 102;">
                 <div class="link-content">
-                    <div class="link-icon" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="link-icon"><i class="fa-brands fa-whatsapp"></i></div>
                     <div class="link-text">
                         <span class="link-title">WhatsApp</span>
                         <span class="link-subtitle">تواصل معايا</span>
@@ -612,22 +785,22 @@
             <div class="featured-grid">
 
                 <a href="YOUR_HIGHLIGHTS_URL" target="_blank" rel="noopener noreferrer" class="feature-card ripple-btn">
-                    <i class="fa-solid fa-crosshairs feature-icon"></i>
+                    <div class="feature-icon"><i class="fa-solid fa-crosshairs"></i></div>
                     <h3 class="feature-title">أقوى لقطات ببجي</h3>
                     <p class="feature-desc">Best PUBG Moments</p>
                 </a>
 
                 <a href="YOUR_LATEST_VIDEOS_URL" target="_blank" rel="noopener noreferrer"
                     class="feature-card ripple-btn">
-                    <i class="fa-solid fa-play feature-icon"></i>
+                    <div class="feature-icon"><i class="fa-solid fa-play"></i></div>
                     <h3 class="feature-title">أحدث الفيديوهات</h3>
                     <p class="feature-desc">Latest Videos</p>
                 </a>
 
                 <a href="YOUR_PLAY_WITH_ME_URL" target="_blank" rel="noopener noreferrer"
                     class="feature-card ripple-btn">
-                    <i class="fa-solid fa-gamepad feature-icon"></i>
-                    <h3 class="feature-title">العب مع 3nbora</h3>
+                    <div class="feature-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3 class="feature-title">العب مع 3NBORA</h3>
                     <p class="feature-desc">Play With Me</p>
                 </a>
 
@@ -642,19 +815,18 @@
                 <a href="https://instagram.com/3nbora" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
             <p class="footer-text">MADE WITH ❤️ FOR THE 3NBORA FAMILY</p>
-            <p class="footer-text" style="margin-top: 5px;">© 2026 3nbora | جميع الحقوق محفوظة</p>
+            <p class="footer-text" style="margin-top: 5px;">© 2026 3NBORA | جميع الحقوق محفوظة</p>
         </footer>
 
     </div>
 
     <!-- ================= JAVASCRIPT ================= -->
     <script>
-        // 1. Web Share API (زر المشاركة أعلى الصفحة)
         const shareBtn = document.getElementById('shareBtn');
         shareBtn.addEventListener('click', async () => {
             const shareData = {
-                title: '3nbora - Link in Bio',
-                text: 'تابع كل حسابات ومحتوى 3nbora في مكان واحد 🔥',
+                title: '3NBORA - Link in Bio',
+                text: 'تابع كل حسابات ومحتوى 3NBORA في مكان واحد 🔥',
                 url: window.location.href
             };
 
@@ -665,7 +837,6 @@
                     console.log('تم إلغاء المشاركة أو حدث خطأ:', err);
                 }
             } else {
-                // بديل للأجهزة التي لا تدعم Web Share API (نسخ الرابط)
                 navigator.clipboard.writeText(window.location.href);
                 const originalHTML = shareBtn.innerHTML;
                 shareBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
@@ -673,12 +844,30 @@
             }
         });
 
-        // 2. Ripple Effect (تأثير الضغط على الأزرار)
+        // تحسين Ripple Effect
         const buttons = document.querySelectorAll('.ripple-btn');
         buttons.forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                const x = e.clientX - e.target.getBoundingClientRect().left;
-                const y = e.clientY - e.target.getBoundingClientRect().top;
+            const createRipple = function (e) {
+                if (e.type === 'touchstart') {
+                    this.dataset.isTouch = 'true';
+                }
+                if (e.type === 'mousedown' && this.dataset.isTouch === 'true') {
+                    return;
+                }
+
+                let clientX, clientY;
+                if (e.type === 'touchstart') {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+
+                // تم التعديل هنا لضمان ظهور التموج في المكان الصحيح
+                const rect = this.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
 
                 const ripples = document.createElement('span');
                 ripples.style.left = x + 'px';
@@ -690,7 +879,10 @@
                 setTimeout(() => {
                     ripples.remove();
                 }, 600);
-            });
+            };
+
+            btn.addEventListener('mousedown', createRipple);
+            btn.addEventListener('touchstart', createRipple, { passive: true });
         });
     </script>
 </body>
