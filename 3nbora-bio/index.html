@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3nbora | محمود عبدالعزيز</title>
+
+    <!-- SEO & Open Graph Tags -->
+    <meta name="description"
+        content="أهلاً بيك في عالم 3nbora 🔥 كل لينكاتي ومحتوايا في مكان واحد. PUBG Mobile Creator.">
+    <meta property="og:title" content="3nbora - Link in Bio">
+    <meta property="og:description" content="الروابط الرسمية لصانع المحتوى 3nbora">
+    <meta property="og:image" content="1000269841.jpg">
+    <meta name="theme-color" content="#111111">
+
+    <!-- Google Fonts: Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= VARIABLES ================= */
+        :root {
+            --bg-color: #0a0a0c;
+            --primary-red: #e50914;
+            --primary-red-glow: rgba(229, 9, 20, 0.5);
+            --accent-gold: #ffb703;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* ================= RESET & GLOBAL ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(255, 183, 3, 0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            z-index: 1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes neon-pulse {
+            0% {
+                box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 20px var(--primary-red-glow), 0 0 40px var(--primary-red-glow);
+            }
+
+            100% {
+                box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Accessibility: Reduce Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            text-align: center;
+            animation: fade-in-up 0.8s ease-out;
+            position: relative;
+        }
+
+        .share-btn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .share-btn:hover {
+            background: var(--glass-hover);
+            color: var(--primary-red);
+        }
+
+        .profile-pic-container {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--primary-red), var(--accent-gold));
+            animation: float 4s ease-in-out infinite, neon-pulse 3s infinite;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-color);
+        }
+
+        .name-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .real-name {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .brand-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #ddd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .verified-badge {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-red-glow);
+        }
+
+        .btn-primary:hover {
+            background-color: #ff1a26;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--primary-red-glow);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: white;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ================= SOCIAL LINKS ================= */
+        .links-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .link-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Delay animations for links */
+        .link-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .link-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .link-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .link-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .link-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .link-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .link-card:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .link-card:hover {
+            transform: scale(1.02);
+            background: var(--glass-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2;
+        }
+
+        .link-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .link-card:hover .link-icon {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .link-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .link-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .link-arrow {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .link-card:hover .link-arrow {
+            color: var(--text-main);
+            transform: translateX(-5px);
+        }
+
+        /* ================= FEATURED CONTENT ================= */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.8s;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.9s;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: var(--glass-hover);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-bottom: 2rem;
+            animation: fade-in-up 0.8s ease-out forwards;
+            opacity: 0;
+            animation-delay: 1s;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Ripple Effect Class */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes ripple-anim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ================= HERO SECTION ================= -->
+        <header class="hero">
+            <button class="share-btn" id="shareBtn" aria-label="مشاركة الصفحة">
+                <i class="fa-solid fa-share-nodes"></i>
+            </button>
+
+            <!-- هنا تضع مسار الصورة الشخصية، قمت باستخدام اسم الصورة المرفقة -->
+            <div class="profile-pic-container">
+                <img src="image.jpg" alt="3nbora Profile" class="profile-pic"
+                    onerror="this.src='https://via.placeholder.com/130?text=3nbora'">
+            </div>
+
+            <p class="real-name">محمود عبدالعزيز</p>
+
+            <div class="name-wrapper">
+                <h1 class="brand-name">3nbora</h1>
+                <!-- علامة التوثيق / الكريتور -->
+                <i class="fa-solid fa-circle-check verified-badge" title="Gaming Creator"></i>
+            </div>
+
+            <p class="bio">
+                أهلاً بيك في عالم 3nbora 🔥<br>
+                PUBG Mobile Creator | Gaming | Highlights
+            </p>
+
+            <div class="hero-ctas">
+                <a href="YOUR_YOUTUBE_LATEST_VIDEO_URL" target="_blank" rel="noopener noreferrer"
+                    class="btn-primary ripple-btn">
+                    شاهد أحدث فيديو <i class="fa-solid fa-fire"></i>
+                </a>
+                <a href="YOUR_YOUTUBE_CHANNEL_URL" target="_blank" rel="noopener noreferrer"
+                    class="btn-secondary ripple-btn">
+                    اشترك في القناة <i class="fa-solid fa-heart"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- ================= SOCIAL LINKS ================= -->
+        <section class="links-section">
+
+            <!-- YouTube -->
+            <a href="YOUR_YOUTUBE_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon"><i class="fa-brands fa-youtube"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">YouTube</span>
+                        <span class="link-subtitle">شوف أحدث فيديوهاتي 🎬</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+            <!-- Kick / Live Stream (من الصورة المرفقة) -->
+            <a href="https://kick.com/3nbora" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon" style="color:#53f518"><i class="fa-brands fa-kickstarter-k"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">Kick Live</span>
+                        <span class="link-subtitle">ادخل معايا اللايف 🔴</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+            <!-- TikTok (من الصورة المرفقة: 3nboora) -->
+            <a href="https://tiktok.com/@3nboora" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon"><i class="fa-brands fa-tiktok"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">TikTok</span>
+                        <span class="link-subtitle">تابع أقوى اللقطات 🔥</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+            <!-- Instagram (من الصورة المرفقة: 3nbora) -->
+            <a href="https://instagram.com/3nbora" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">Instagram</span>
+                        <span class="link-subtitle">يومياتي ولقطاتي 📸</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+            <!-- Facebook -->
+            <a href="YOUR_FACEBOOK_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon"><i class="fa-brands fa-facebook-f"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">Facebook</span>
+                        <span class="link-subtitle">تابعني على فيسبوك</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+            <!-- Discord -->
+            <a href="YOUR_DISCORD_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon" style="color:#5865F2"><i class="fa-brands fa-discord"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">Discord Server</span>
+                        <span class="link-subtitle">انضم لعيلة 3nbora 🎮</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="YOUR_WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn">
+                <div class="link-content">
+                    <div class="link-icon" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="link-text">
+                        <span class="link-title">WhatsApp</span>
+                        <span class="link-subtitle">تواصل معايا</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-left link-arrow"></i>
+            </a>
+
+        </section>
+
+        <!-- ================= FEATURED CONTENT ================= -->
+        <section>
+            <h2 class="section-title">🔥 اختار مغامرتك</h2>
+            <div class="featured-grid">
+
+                <a href="YOUR_HIGHLIGHTS_URL" target="_blank" rel="noopener noreferrer" class="feature-card ripple-btn">
+                    <i class="fa-solid fa-crosshairs feature-icon"></i>
+                    <h3 class="feature-title">أقوى لقطات ببجي</h3>
+                    <p class="feature-desc">Best PUBG Moments</p>
+                </a>
+
+                <a href="YOUR_LATEST_VIDEOS_URL" target="_blank" rel="noopener noreferrer"
+                    class="feature-card ripple-btn">
+                    <i class="fa-solid fa-play feature-icon"></i>
+                    <h3 class="feature-title">أحدث الفيديوهات</h3>
+                    <p class="feature-desc">Latest Videos</p>
+                </a>
+
+                <a href="YOUR_PLAY_WITH_ME_URL" target="_blank" rel="noopener noreferrer"
+                    class="feature-card ripple-btn">
+                    <i class="fa-solid fa-gamepad feature-icon"></i>
+                    <h3 class="feature-title">العب مع 3nbora</h3>
+                    <p class="feature-desc">Play With Me</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- ================= FOOTER ================= -->
+        <footer>
+            <div class="footer-socials">
+                <a href="mailto:Tiger.206066@gmail.com" title="Business Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://tiktok.com/@3nboora" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://instagram.com/3nbora" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <p class="footer-text">MADE WITH ❤️ FOR THE 3NBORA FAMILY</p>
+            <p class="footer-text" style="margin-top: 5px;">© 2026 3nbora | جميع الحقوق محفوظة</p>
+        </footer>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // 1. Web Share API (زر المشاركة أعلى الصفحة)
+        const shareBtn = document.getElementById('shareBtn');
+        shareBtn.addEventListener('click', async () => {
+            const shareData = {
+                title: '3nbora - Link in Bio',
+                text: 'تابع كل حسابات ومحتوى 3nbora في مكان واحد 🔥',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.log('تم إلغاء المشاركة أو حدث خطأ:', err);
+                }
+            } else {
+                // بديل للأجهزة التي لا تدعم Web Share API (نسخ الرابط)
+                navigator.clipboard.writeText(window.location.href);
+                const originalHTML = shareBtn.innerHTML;
+                shareBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => { shareBtn.innerHTML = originalHTML; }, 2000);
+            }
+        });
+
+        // 2. Ripple Effect (تأثير الضغط على الأزرار)
+        const buttons = document.querySelectorAll('.ripple-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+
+                const ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                ripples.classList.add('ripple');
+
+                this.appendChild(ripples);
+
+                setTimeout(() => {
+                    ripples.remove();
+                }, 600);
+            });
+        });
+    </script>
+</body>
+
+</html>
