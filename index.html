@@ -138,54 +138,6 @@
             }
         }
 
-        @keyframes card-pulse {
-            0% {
-                box-shadow: 0 0 5px rgba(var(--platform-color-rgb), 0.2);
-                border-color: rgba(var(--platform-color-rgb), 0.3);
-            }
-
-            50% {
-                box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.6);
-                border-color: rgba(var(--platform-color-rgb), 0.8);
-            }
-
-            100% {
-                box-shadow: 0 0 5px rgba(var(--platform-color-rgb), 0.2);
-                border-color: rgba(var(--platform-color-rgb), 0.3);
-            }
-        }
-
-        @keyframes card-pulse-hover {
-            0% {
-                box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.6);
-                border-color: rgb(var(--platform-color-rgb));
-            }
-
-            50% {
-                box-shadow: 0 0 25px rgba(var(--platform-color-rgb), 0.9);
-                border-color: rgb(var(--platform-color-rgb));
-            }
-
-            100% {
-                box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.6);
-                border-color: rgb(var(--platform-color-rgb));
-            }
-        }
-
-        @keyframes icon-pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
         @keyframes fade-in-up {
             from {
                 opacity: 0;
@@ -198,10 +150,31 @@
             }
         }
 
+        /* أنيميشن توهج الروابط الجديد */
+        @keyframes border-pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.3),
+                    inset 0 0 5px rgba(var(--platform-color-rgb), 0.1);
+                border-color: rgba(var(--platform-color-rgb), 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(var(--platform-color-rgb), 0.8),
+                    inset 0 0 15px rgba(var(--platform-color-rgb), 0.3);
+                border-color: rgba(var(--platform-color-rgb), 0.9);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.3),
+                    inset 0 0 5px rgba(var(--platform-color-rgb), 0.1);
+                border-color: rgba(var(--platform-color-rgb), 0.4);
+            }
+        }
+
         /* ================= HERO SECTION ================= */
         .hero {
             text-align: center;
-            animation: fade-in-up 0.8s ease-out both;
+            animation: fade-in-up 0.8s ease-out backwards;
             position: relative;
         }
 
@@ -345,7 +318,7 @@
             transform: scale(0.95);
         }
 
-        /* ================= SOCIAL LINKS ================= */
+        /* ================= SOCIAL LINKS (WITH ANIMATED GLOW) ================= */
         .links-section {
             display: flex;
             flex-direction: column;
@@ -360,58 +333,62 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: var(--transition);
-            /* تم التعديل هنا لحل مشكلة اختفاء الروابط */
-            animation: fade-in-up 0.8s ease-out both, card-pulse 2.5s infinite alternate;
-            opacity: 1;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 2px solid transparent;
+            border: 2px solid rgba(var(--platform-color-rgb), 0.6);
+
+            /* دمج أنيميشن الدخول مع أنيميشن النبض المستمر */
+            animation: fade-in-up 0.6s ease-out backwards, border-pulse 2.5s infinite ease-in-out;
         }
 
+        /* توقيت دخول الكروت */
         .link-card:nth-child(1) {
-            animation-delay: 0.1s, 0s;
+            animation-delay: 0.1s;
         }
 
         .link-card:nth-child(2) {
-            animation-delay: 0.2s, 0s;
+            animation-delay: 0.2s;
         }
 
         .link-card:nth-child(3) {
-            animation-delay: 0.3s, 0s;
+            animation-delay: 0.3s;
         }
 
         .link-card:nth-child(4) {
-            animation-delay: 0.4s, 0s;
+            animation-delay: 0.4s;
         }
 
         .link-card:nth-child(5) {
-            animation-delay: 0.5s, 0s;
+            animation-delay: 0.5s;
         }
 
         .link-card:nth-child(6) {
-            animation-delay: 0.6s, 0s;
+            animation-delay: 0.6s;
         }
 
         .link-card:nth-child(7) {
-            animation-delay: 0.7s, 0s;
+            animation-delay: 0.7s;
         }
 
         .link-card:hover,
         .link-card:focus {
             background: rgba(40, 40, 45, 0.95);
-            animation: card-pulse-hover 1.5s infinite alternate;
+            /* استخدام !important لتخطي الأنيميشن عند تمرير الماوس وإظهار أعلى توهج */
+            box-shadow: 0 0 35px rgba(var(--platform-color-rgb), 0.9),
+                inset 0 0 20px rgba(var(--platform-color-rgb), 0.4) !important;
+            border-color: rgba(var(--platform-color-rgb), 1) !important;
+            transform: translateY(-3px) !important;
             z-index: 10;
             outline: none;
-            opacity: 1;
-            /* تأكيد الشفافية */
+            /* إيقاف النبض أثناء تمرير الماوس */
+            animation-play-state: paused;
         }
 
         .link-card:active {
-            transform: scale(0.98);
-            animation: card-pulse-hover 0.5s infinite alternate;
-            opacity: 1;
-            /* تأكيد الشفافية */
+            transform: scale(0.97) !important;
+            box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.5),
+                inset 0 0 5px rgba(var(--platform-color-rgb), 0.2) !important;
         }
 
         .link-content {
@@ -431,8 +408,7 @@
             font-size: 1.5rem;
             background: rgba(var(--platform-color-rgb), 0.15);
             color: rgb(var(--platform-color-rgb));
-            transition: var(--transition);
-            animation: icon-pulse 2s infinite ease-in-out;
+            transition: all 0.3s ease;
         }
 
         .link-card:hover .link-icon,
@@ -440,7 +416,6 @@
         .link-card:active .link-icon {
             background: rgb(var(--platform-color-rgb));
             color: white;
-            animation: none;
             box-shadow: 0 0 15px rgb(var(--platform-color-rgb));
         }
 
@@ -453,7 +428,7 @@
             font-weight: 700;
             font-size: 1.1rem;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .link-card:hover .link-title,
@@ -466,7 +441,7 @@
         .link-subtitle {
             font-size: 0.85rem;
             color: var(--text-muted);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .link-card:hover .link-subtitle,
@@ -478,7 +453,7 @@
         .link-arrow {
             color: rgb(var(--platform-color-rgb));
             opacity: 0.7;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .link-card:hover .link-arrow,
@@ -488,7 +463,7 @@
             text-shadow: 0 0 10px rgb(var(--platform-color-rgb));
         }
 
-        /* ================= FEATURED CONTENT ================= */
+        /* ================= FEATURED CONTENT (WITH ANIMATED GLOW) ================= */
         .section-title {
             font-size: 1.3rem;
             font-weight: 800;
@@ -496,7 +471,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            animation: fade-in-up 0.8s ease-out both;
+            animation: fade-in-up 0.8s ease-out backwards;
             animation-delay: 0.8s;
         }
 
@@ -504,13 +479,12 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            animation: fade-in-up 0.8s ease-out both;
+            animation: fade-in-up 0.8s ease-out backwards;
             animation-delay: 0.9s;
         }
 
         .feature-card {
             background: rgba(25, 25, 30, 0.8);
-            border: 2px solid transparent;
             border-radius: 16px;
             padding: 1.5rem 1rem;
             display: flex;
@@ -519,43 +493,44 @@
             justify-content: center;
             text-align: center;
             gap: 0.5rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            animation: card-pulse 3s infinite alternate;
             --platform-color-rgb: 229, 9, 20;
-            opacity: 1;
-            /* تأكيد الشفافية */
+
+            /* توهج كروت الميزات */
+            border: 2px solid rgba(var(--platform-color-rgb), 0.6);
+            animation: border-pulse 2.5s infinite ease-in-out;
         }
 
         .feature-card:hover,
         .feature-card:focus {
             background: rgba(40, 40, 45, 0.95);
-            animation: card-pulse-hover 1.5s infinite alternate;
+            box-shadow: 0 0 35px rgba(var(--platform-color-rgb), 0.9),
+                inset 0 0 20px rgba(var(--platform-color-rgb), 0.4) !important;
+            border-color: rgba(var(--platform-color-rgb), 1) !important;
+            transform: translateY(-3px) !important;
             z-index: 5;
             outline: none;
-            opacity: 1;
+            animation-play-state: paused;
         }
 
         .feature-card:active {
-            transform: scale(0.95);
-            animation: card-pulse-hover 0.5s infinite alternate;
-            opacity: 1;
+            transform: scale(0.96) !important;
+            box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.4) !important;
         }
 
         .feature-icon {
             font-size: 2rem;
             color: var(--primary-red);
             margin-bottom: 0.5rem;
-            transition: var(--transition);
-            animation: icon-pulse 2.5s infinite ease-in-out;
+            transition: all 0.3s ease;
         }
 
         .feature-card:hover .feature-icon,
         .feature-card:focus .feature-icon,
         .feature-card:active .feature-icon {
-            animation: none;
             color: rgb(var(--platform-color-rgb));
             text-shadow: 0 0 15px rgb(var(--platform-color-rgb));
             transform: scale(1.1);
@@ -565,7 +540,7 @@
             font-weight: 700;
             font-size: 1rem;
             margin-bottom: 0.2rem;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .feature-card:hover .feature-title,
@@ -578,7 +553,7 @@
         .feature-desc {
             font-size: 0.8rem;
             color: var(--text-muted);
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .feature-card:hover .feature-desc,
@@ -592,7 +567,7 @@
             text-align: center;
             margin-top: 3rem;
             padding-bottom: 2rem;
-            animation: fade-in-up 0.8s ease-out both;
+            animation: fade-in-up 0.8s ease-out backwards;
             animation-delay: 1s;
         }
 
@@ -864,7 +839,6 @@
                     clientY = e.clientY;
                 }
 
-                // تم التعديل هنا لضمان ظهور التموج في المكان الصحيح
                 const rect = this.getBoundingClientRect();
                 const x = clientX - rect.left;
                 const y = clientY - rect.top;
