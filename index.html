@@ -34,7 +34,7 @@
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-hover: rgba(255, 255, 255, 0.15);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         /* ================= RESET & GLOBAL ================= */
@@ -61,6 +61,18 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            position: relative;
+        }
+
+        /* خلفية الجزيئات والشرارات */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
@@ -71,6 +83,7 @@
             flex-direction: column;
             gap: 2rem;
             z-index: 1;
+            perspective: 1000px;
         }
 
         a {
@@ -79,22 +92,19 @@
             outline: none;
         }
 
-        /* ================= ANIMATIONS ================= */
+        /* ================= ANIMATIONS (MOBILE & DESKTOP) ================= */
         @keyframes float {
-            0% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
 
             50% {
                 transform: translateY(-10px);
             }
-
-            100% {
-                transform: translateY(0px);
-            }
         }
 
-        /* أنيميشن التحريك المستمر للإطارات والأزرار */
         @keyframes float-action {
 
             0%,
@@ -108,86 +118,183 @@
         }
 
         @keyframes neon-pulse-profile {
-            0% {
-                box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px var(--primary-red-glow), 0 0 30px rgba(255, 183, 3, 0.25);
             }
 
             50% {
-                box-shadow: 0 0 20px var(--primary-red-glow), 0 0 40px var(--primary-red-glow);
+                box-shadow: 0 0 30px var(--primary-red), 0 0 55px rgba(255, 183, 3, 0.6);
+            }
+        }
+
+        @keyframes spin-gradient {
+            0% {
+                transform: rotate(0deg);
             }
 
             100% {
-                box-shadow: 0 0 10px var(--primary-red-glow), 0 0 20px var(--primary-red-glow);
+                transform: rotate(360deg);
             }
         }
 
         @keyframes btn-pulse {
-            0% {
-                box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
+                transform: scale(1);
             }
 
             50% {
-                box-shadow: 0 0 20px rgba(229, 9, 20, 0.7);
-                transform: scale(1.02);
-            }
-
-            100% {
-                box-shadow: 0 0 5px rgba(229, 9, 20, 0.3);
+                box-shadow: 0 0 28px rgba(229, 9, 20, 0.9), 0 0 10px rgba(255, 255, 255, 0.3);
+                transform: scale(1.03);
             }
         }
 
         @keyframes btn-secondary-pulse {
-            0% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+                transform: scale(1);
             }
 
             50% {
-                box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
                 transform: scale(1.02);
             }
-
-            100% {
-                box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-            }
         }
 
-        @keyframes fade-in-up {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* أنيميشن توهج الروابط المستمر */
         @keyframes border-pulse {
-            0% {
-                box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.3),
-                    inset 0 0 5px rgba(var(--platform-color-rgb), 0.1);
-                border-color: rgba(var(--platform-color-rgb), 0.4);
+
+            0%,
+            100% {
+                box-shadow: 0 0 12px rgba(var(--platform-color-rgb), 0.3),
+                    inset 0 0 6px rgba(var(--platform-color-rgb), 0.1);
+                border-color: rgba(var(--platform-color-rgb), 0.45);
             }
 
             50% {
-                box-shadow: 0 0 25px rgba(var(--platform-color-rgb), 0.8),
-                    inset 0 0 15px rgba(var(--platform-color-rgb), 0.3);
-                border-color: rgba(var(--platform-color-rgb), 0.9);
+                box-shadow: 0 0 28px rgba(var(--platform-color-rgb), 0.8),
+                    inset 0 0 18px rgba(var(--platform-color-rgb), 0.3);
+                border-color: rgba(var(--platform-color-rgb), 0.95);
+            }
+        }
+
+        /* لمعان مستمر يعبر الكروت والأزرار (مهم جداً للموبايل) */
+        @keyframes shine-sweep {
+            0% {
+                left: -120%;
             }
 
+            25%,
             100% {
-                box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.3),
-                    inset 0 0 5px rgba(var(--platform-color-rgb), 0.1);
-                border-color: rgba(var(--platform-color-rgb), 0.4);
+                left: 150%;
             }
+        }
+
+        /* حركة تلقائية للأيقونات على الهاتف */
+        @keyframes icon-wiggle {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: scale(1.1) rotate(-6deg);
+            }
+
+            75% {
+                transform: scale(1.1) rotate(6deg);
+            }
+        }
+
+        /* حركة ارتداد السهم لجذب الانتباه على الموبايل */
+        @keyframes arrow-bounce {
+
+            0%,
+            100% {
+                transform: translateX(0);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateX(-6px);
+                opacity: 1;
+                filter: drop-shadow(0 0 6px rgb(var(--platform-color-rgb)));
+            }
+        }
+
+        @keyframes badge-pulse {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 2px var(--accent-gold));
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+                filter: drop-shadow(0 0 12px var(--accent-gold));
+            }
+        }
+
+        @keyframes fire-flicker {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(-4deg);
+                filter: drop-shadow(0 0 5px #ff9900);
+            }
+
+            50% {
+                transform: scale(1.25) rotate(6deg);
+                filter: drop-shadow(0 0 14px #ff0000);
+            }
+        }
+
+        @keyframes heart-beat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.28);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* كلاس الظهور القوي عند التمرير على الهاتف */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(45px) scale(0.9) rotateX(-12deg);
+            filter: blur(6px);
+            transition: opacity 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.5s ease-out;
+        }
+
+        .reveal-item.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotateX(0deg);
+            filter: blur(0);
         }
 
         /* ================= HERO SECTION ================= */
         .hero {
             text-align: center;
-            animation: fade-in-up 0.8s ease-out backwards;
             position: relative;
         }
 
@@ -198,8 +305,8 @@
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             color: var(--text-main);
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -207,30 +314,59 @@
             cursor: pointer;
             transition: var(--transition);
             animation: float-action 4s infinite ease-in-out;
+            backdrop-filter: blur(8px);
+            z-index: 5;
         }
 
         .share-btn:hover,
         .share-btn:focus {
             background: var(--glass-hover);
             color: var(--primary-red);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            translate: 0 -3px;
+            box-shadow: 0 0 15px var(--primary-red-glow);
+            transform: rotate(15deg) scale(1.1);
             animation-play-state: paused;
         }
 
         .share-btn:active {
-            transform: scale(0.9);
-            background: var(--glass-hover);
+            transform: scale(0.85) rotate(-10deg);
+            background: var(--primary-red);
+            color: #fff;
         }
 
         .profile-pic-container {
-            width: 130px;
-            height: 130px;
+            width: 135px;
+            height: 135px;
             margin: 0 auto 1rem;
             border-radius: 50%;
             padding: 4px;
-            background: linear-gradient(45deg, var(--primary-red), var(--accent-gold));
+            position: relative;
             animation: float 4s ease-in-out infinite, neon-pulse-profile 3s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* حلقة نيون دوارة حول الصورة */
+        .profile-pic-container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary-red), var(--accent-gold), #ff0055, var(--accent-gold), var(--primary-red));
+            animation: spin-gradient 3.5s linear infinite;
+            z-index: -1;
+        }
+
+        .profile-pic-container::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, var(--primary-red), transparent, var(--accent-gold), transparent);
+            filter: blur(8px);
+            opacity: 0.7;
+            animation: spin-gradient 5s linear infinite reverse;
+            z-index: -2;
         }
 
         .profile-pic {
@@ -239,6 +375,12 @@
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--bg-color);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .profile-pic-container:hover .profile-pic,
+        .profile-pic-container:active .profile-pic {
+            transform: scale(1.07) rotate(3deg);
         }
 
         .name-wrapper {
@@ -252,15 +394,18 @@
         .brand-name {
             font-size: 2.2rem;
             font-weight: 800;
-            background: linear-gradient(to right, #fff, #ddd);
+            background: linear-gradient(90deg, #fff, #ddd, #fff);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .verified-badge {
             color: var(--accent-gold);
             font-size: 1.2rem;
+            animation: badge-pulse 2.8s infinite ease-in-out;
         }
 
         .bio {
@@ -279,7 +424,7 @@
 
         .btn-primary,
         .btn-secondary {
-            padding: 0.8rem 2rem;
+            padding: 0.85rem 2rem;
             border-radius: 30px;
             font-weight: 700;
             font-size: 1rem;
@@ -287,12 +432,33 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             border: none;
             position: relative;
             overflow: hidden;
-            width: 80%;
+            width: 85%;
+            max-width: 380px;
             justify-content: center;
+        }
+
+        /* لمعان تلقائي على الأزرار */
+        .btn-primary::after,
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-25deg);
+            animation: shine-sweep 4s infinite;
+            pointer-events: none;
+        }
+
+        .btn-secondary::after {
+            animation-delay: 2s;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
         }
 
         .btn-primary {
@@ -301,17 +467,27 @@
             animation: btn-pulse 2s infinite ease-in-out, float-action 3s infinite ease-in-out;
         }
 
+        .btn-primary .fa-fire {
+            animation: fire-flicker 1.4s infinite ease-in-out;
+        }
+
+        .btn-secondary .fa-heart {
+            animation: heart-beat 1.8s infinite ease-in-out;
+            color: var(--primary-red);
+        }
+
         .btn-primary:hover,
         .btn-primary:focus {
             background-color: #ff1a26;
             animation: none;
-            translate: 0 -3px;
+            translate: 0 -4px;
             transform: scale(1.05);
-            box-shadow: 0 10px 30px var(--primary-red-glow), 0 0 15px var(--primary-red);
+            box-shadow: 0 12px 30px var(--primary-red-glow), 0 0 20px var(--primary-red);
         }
 
         .btn-primary:active {
-            transform: scale(0.95);
+            transform: scale(0.92) !important;
+            box-shadow: 0 0 35px var(--primary-red) !important;
         }
 
         .btn-secondary {
@@ -326,85 +502,152 @@
         .btn-secondary:focus {
             background: var(--glass-hover);
             animation: none;
-            translate: 0 -3px;
+            translate: 0 -4px;
             transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15), 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
         .btn-secondary:active {
-            transform: scale(0.95);
+            transform: scale(0.92) !important;
         }
 
-        /* ================= SOCIAL LINKS (WITH ANIMATED GLOW) ================= */
+        /* ================= SOCIAL LINKS (MOBILE & DESKTOP POWER ANIMATIONS) ================= */
         .links-section {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.05rem;
         }
 
         .link-card {
-            background: rgba(25, 25, 30, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(25, 25, 30, 0.82);
+            backdrop-filter: blur(12px);
             border-radius: 16px;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.4rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
-            /* دمج أنيميشن الدخول مع أنيميشن النبض المستمر وتحريك الإطارات */
-            animation: fade-in-up 0.6s ease-out backwards, border-pulse 2.5s infinite ease-in-out, float-action 4s infinite ease-in-out;
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            animation: border-pulse 2.5s infinite ease-in-out, float-action 4s infinite ease-in-out;
         }
 
-        /* توقيت دخول الكروت */
+        /* شعاع ضوئي تلقائي يعبر الكروت على الموبايل */
+        .link-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--platform-color-rgb), 0.22), transparent);
+            transform: skewX(-25deg);
+            animation: shine-sweep 5s infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* فروق توقيت للنبض واللمعان حتى تبدو الصفحة حية وغير متكررة على الهاتف */
         .link-card:nth-child(1) {
-            animation-delay: 0.1s;
+            animation-delay: 0s, 0s;
         }
 
-        .link-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .link-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        .link-card:nth-child(4) {
-            animation-delay: 0.4s;
-        }
-
-        .link-card:nth-child(5) {
+        .link-card:nth-child(1)::after {
             animation-delay: 0.5s;
         }
 
+        .link-card:nth-child(2) {
+            animation-delay: 0.3s, 0.5s;
+        }
+
+        .link-card:nth-child(2)::after {
+            animation-delay: 1.2s;
+        }
+
+        .link-card:nth-child(3) {
+            animation-delay: 0.6s, 1s;
+        }
+
+        .link-card:nth-child(3)::after {
+            animation-delay: 1.9s;
+        }
+
+        .link-card:nth-child(4) {
+            animation-delay: 0.9s, 1.5s;
+        }
+
+        .link-card:nth-child(4)::after {
+            animation-delay: 2.6s;
+        }
+
+        .link-card:nth-child(5) {
+            animation-delay: 1.2s, 2s;
+        }
+
+        .link-card:nth-child(5)::after {
+            animation-delay: 3.3s;
+        }
+
         .link-card:nth-child(6) {
-            animation-delay: 0.6s;
+            animation-delay: 1.5s, 2.5s;
+        }
+
+        .link-card:nth-child(6)::after {
+            animation-delay: 4.0s;
         }
 
         .link-card:nth-child(7) {
-            animation-delay: 0.7s;
+            animation-delay: 1.8s, 3s;
+        }
+
+        .link-card:nth-child(7)::after {
+            animation-delay: 4.7s;
+        }
+
+        /* إضاءة تتبع اللمس والماوس */
+        .link-card::before,
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            transform: translate(-50%, -50%);
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(var(--platform-color-rgb), 0.35) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .link-card:hover::before,
+        .feature-card:hover::before,
+        .link-card.touch-active::before,
+        .feature-card.touch-active::before {
+            opacity: 1;
         }
 
         .link-card:hover,
-        .link-card:focus {
-            background: rgba(40, 40, 45, 0.95);
-            box-shadow: 0 0 35px rgba(var(--platform-color-rgb), 0.9),
-                inset 0 0 20px rgba(var(--platform-color-rgb), 0.4) !important;
+        .link-card:focus,
+        .link-card.touch-active {
+            background: rgba(40, 40, 48, 0.96);
+            box-shadow: 0 12px 35px rgba(var(--platform-color-rgb), 0.85),
+                inset 0 0 22px rgba(var(--platform-color-rgb), 0.45) !important;
             border-color: rgba(var(--platform-color-rgb), 1) !important;
             translate: 0 -6px !important;
             z-index: 10;
             outline: none;
-            /* إيقاف النبض والحركة أثناء تمرير الماوس */
             animation-play-state: paused;
         }
 
+        /* تأثير الضغط باللمس على الهاتف */
         .link-card:active {
-            transform: scale(0.97) !important;
-            box-shadow: 0 0 15px rgba(var(--platform-color-rgb), 0.5),
-                inset 0 0 5px rgba(var(--platform-color-rgb), 0.2) !important;
+            transform: scale(0.95) !important;
+            transition: transform 0.1s ease;
         }
 
         .link-content {
@@ -415,24 +658,33 @@
         }
 
         .link-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            background: rgba(var(--platform-color-rgb), 0.15);
+            font-size: 1.55rem;
+            background: rgba(var(--platform-color-rgb), 0.16);
             color: rgb(var(--platform-color-rgb));
-            transition: all 0.3s ease;
+            box-shadow: 0 0 12px rgba(var(--platform-color-rgb), 0.25);
+            transition: var(--transition);
+            animation: icon-wiggle 3.5s infinite ease-in-out;
+        }
+
+        .link-card:nth-child(even) .link-icon {
+            animation-delay: 1.5s;
         }
 
         .link-card:hover .link-icon,
         .link-card:focus .link-icon,
-        .link-card:active .link-icon {
+        .link-card:active .link-icon,
+        .link-card.touch-active .link-icon {
             background: rgb(var(--platform-color-rgb));
             color: white;
-            box-shadow: 0 0 15px rgb(var(--platform-color-rgb));
+            box-shadow: 0 0 22px rgb(var(--platform-color-rgb));
+            transform: scale(1.18) rotate(-10deg);
+            animation-play-state: paused;
         }
 
         .link-text {
@@ -444,42 +696,51 @@
             font-weight: 700;
             font-size: 1.1rem;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .link-card:hover .link-title,
         .link-card:focus .link-title,
-        .link-card:active .link-title {
+        .link-card:active .link-title,
+        .link-card.touch-active .link-title {
             color: rgb(var(--platform-color-rgb));
-            text-shadow: 0 0 8px rgba(var(--platform-color-rgb), 0.5);
+            text-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.6);
+            transform: translateX(-4px);
         }
 
         .link-subtitle {
             font-size: 0.85rem;
             color: var(--text-muted);
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
         .link-card:hover .link-subtitle,
         .link-card:focus .link-subtitle,
-        .link-card:active .link-subtitle {
+        .link-card:active .link-subtitle,
+        .link-card.touch-active .link-subtitle {
             color: var(--text-main);
+            transform: translateX(-4px);
         }
 
         .link-arrow {
             color: rgb(var(--platform-color-rgb));
-            opacity: 0.7;
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            z-index: 2;
+            animation: arrow-bounce 2s infinite ease-in-out;
         }
 
         .link-card:hover .link-arrow,
         .link-card:focus .link-arrow,
-        .link-card:active .link-arrow {
+        .link-card:active .link-arrow,
+        .link-card.touch-active .link-arrow {
             opacity: 1;
-            text-shadow: 0 0 10px rgb(var(--platform-color-rgb));
+            text-shadow: 0 0 12px rgb(var(--platform-color-rgb));
+            transform: translateX(-10px) scale(1.3);
+            animation-play-state: paused;
         }
 
-        /* ================= FEATURED CONTENT (WITH ANIMATED GLOW) ================= */
+        /* ================= FEATURED CONTENT ================= */
         .section-title {
             font-size: 1.3rem;
             font-weight: 800;
@@ -487,20 +748,17 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            animation: fade-in-up 0.8s ease-out backwards;
-            animation-delay: 0.8s;
         }
 
         .featured-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            animation: fade-in-up 0.8s ease-out backwards;
-            animation-delay: 0.9s;
         }
 
         .feature-card {
-            background: rgba(25, 25, 30, 0.8);
+            background: rgba(25, 25, 30, 0.82);
+            backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 1.5rem 1rem;
             display: flex;
@@ -509,59 +767,91 @@
             justify-content: center;
             text-align: center;
             gap: 0.5rem;
-            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             --platform-color-rgb: 229, 9, 20;
-
-            /* توهج كروت الميزات وحركتها */
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
             animation: border-pulse 2.5s infinite ease-in-out, float-action 3.5s infinite ease-in-out;
         }
 
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(229, 9, 20, 0.2), transparent);
+            transform: skewX(-25deg);
+            animation: shine-sweep 5.5s infinite;
+            pointer-events: none;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.4s, 0.7s;
+        }
+
+        .feature-card:nth-child(2)::after {
+            animation-delay: 1.8s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.8s, 1.4s;
+        }
+
+        .feature-card:nth-child(3)::after {
+            animation-delay: 3.2s;
+        }
+
         .feature-card:hover,
-        .feature-card:focus {
-            background: rgba(40, 40, 45, 0.95);
-            box-shadow: 0 0 35px rgba(var(--platform-color-rgb), 0.9),
-                inset 0 0 20px rgba(var(--platform-color-rgb), 0.4) !important;
+        .feature-card:focus,
+        .feature-card.touch-active {
+            background: rgba(40, 40, 48, 0.96);
+            box-shadow: 0 12px 35px rgba(var(--platform-color-rgb), 0.9),
+                inset 0 0 20px rgba(var(--platform-color-rgb), 0.45) !important;
             border-color: rgba(var(--platform-color-rgb), 1) !important;
-            translate: 0 -6px !important;
+            translate: 0 -8px !important;
             z-index: 5;
             outline: none;
             animation-play-state: paused;
         }
 
         .feature-card:active {
-            transform: scale(0.96) !important;
-            box-shadow: 0 0 10px rgba(var(--platform-color-rgb), 0.4) !important;
+            transform: scale(0.94) !important;
         }
 
         .feature-icon {
-            font-size: 2rem;
+            font-size: 2.1rem;
             color: var(--primary-red);
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
+            margin-bottom: 0.4rem;
+            transition: var(--transition);
+            z-index: 2;
+            animation: icon-wiggle 4s infinite ease-in-out;
         }
 
         .feature-card:hover .feature-icon,
         .feature-card:focus .feature-icon,
-        .feature-card:active .feature-icon {
-            color: rgb(var(--platform-color-rgb));
-            text-shadow: 0 0 15px rgb(var(--platform-color-rgb));
-            transform: scale(1.1);
+        .feature-card:active .feature-icon,
+        .feature-card.touch-active .feature-icon {
+            color: #fff;
+            text-shadow: 0 0 20px rgb(var(--platform-color-rgb)), 0 0 35px rgb(var(--platform-color-rgb));
+            transform: scale(1.25) translateY(-4px);
+            animation-play-state: paused;
         }
 
         .feature-title {
             font-weight: 700;
             font-size: 1rem;
             margin-bottom: 0.2rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            z-index: 2;
         }
 
         .feature-card:hover .feature-title,
         .feature-card:focus .feature-title,
-        .feature-card:active .feature-title {
+        .feature-card:active .feature-title,
+        .feature-card.touch-active .feature-title {
             color: var(--primary-red);
             text-shadow: 0 0 8px rgba(var(--platform-color-rgb), 0.5);
         }
@@ -569,47 +859,45 @@
         .feature-desc {
             font-size: 0.8rem;
             color: var(--text-muted);
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            z-index: 2;
         }
 
         .feature-card:hover .feature-desc,
         .feature-card:focus .feature-desc,
-        .feature-card:active .feature-desc {
+        .feature-card:active .feature-desc,
+        .feature-card.touch-active .feature-desc {
             color: var(--text-main);
         }
 
         /* ================= FOOTER & DEV SIGNATURE ================= */
         footer {
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 2rem;
             padding-bottom: 2rem;
-            animation: fade-in-up 0.8s ease-out backwards;
-            animation-delay: 1s;
         }
 
         .footer-socials {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.3rem;
             margin-bottom: 1rem;
         }
 
         .footer-socials a {
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.35rem;
             transition: var(--transition);
             outline: none;
+            display: inline-flex;
         }
 
         .footer-socials a:hover,
-        .footer-socials a:focus {
-            color: var(--primary-red);
-            transform: scale(1.2);
-            text-shadow: 0 0 10px var(--primary-red-glow);
-        }
-
+        .footer-socials a:focus,
         .footer-socials a:active {
-            transform: scale(0.9);
+            color: var(--primary-red);
+            transform: translateY(-5px) scale(1.25);
+            text-shadow: 0 0 12px var(--primary-red-glow);
         }
 
         .footer-text {
@@ -627,10 +915,11 @@
             display: inline-block;
         }
 
-        .developer-name:hover {
+        .developer-name:hover,
+        .developer-name:active {
             color: #fff;
             text-shadow: 0 0 15px var(--primary-red), 0 0 30px var(--primary-red);
-            transform: scale(1.05);
+            transform: scale(1.08) translateY(-1px);
         }
 
         /* Ripple Effect */
@@ -638,15 +927,62 @@
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: ripple-anim 0.6s linear;
-            background-color: rgba(255, 255, 255, 0.3);
+            animation: ripple-anim 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(var(--platform-color-rgb, 229, 9, 20), 0.3) 100%);
             pointer-events: none;
+            z-index: 20;
         }
 
         @keyframes ripple-anim {
             to {
-                transform: scale(4);
+                transform: scale(4.5);
                 opacity: 0;
+            }
+        }
+
+        /* تحسينات خاصة لشاشات الموبايل */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem 1.1rem;
+                gap: 1.6rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 92%;
+                padding: 0.9rem 1.5rem;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+
+            .feature-card {
+                flex-direction: row;
+                justify-content: flex-start;
+                text-align: right;
+                padding: 1.1rem 1.3rem;
+                gap: 1.1rem;
+            }
+
+            .feature-icon {
+                margin-bottom: 0;
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                background: rgba(229, 9, 20, 0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                flex-shrink: 0;
+            }
+
+            .feature-info-wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -654,10 +990,13 @@
 
 <body>
 
+    <!-- خلفية الجزيئات والشرارات التفاعلية -->
+    <canvas id="particles-canvas"></canvas>
+
     <div class="container">
 
         <!-- ================= HERO SECTION ================= -->
-        <header class="hero">
+        <header class="hero reveal-item">
             <button class="share-btn" id="shareBtn" aria-label="مشاركة الصفحة">
                 <i class="fa-solid fa-share-nodes"></i>
             </button>
@@ -693,8 +1032,8 @@
         <section class="links-section">
 
             <!-- YouTube -->
-            <a href="YOUR_YOUTUBE_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
-                style="--platform-color-rgb: 255, 0, 0;">
+            <a href="YOUR_YOUTUBE_URL" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 255, 0, 0;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-youtube"></i></div>
                     <div class="link-text">
@@ -706,8 +1045,8 @@
             </a>
 
             <!-- Kick -->
-            <a href="https://kick.com/3nbora" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
-                style="--platform-color-rgb: 83, 245, 24;">
+            <a href="https://kick.com/3nbora" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 83, 245, 24;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-kickstarter-k"></i></div>
                     <div class="link-text">
@@ -719,8 +1058,8 @@
             </a>
 
             <!-- TikTok -->
-            <a href="https://tiktok.com/@3nboora" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
-                style="--platform-color-rgb: 0, 242, 254;">
+            <a href="https://tiktok.com/@3nboora" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 0, 242, 254;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-tiktok"></i></div>
                     <div class="link-text">
@@ -733,7 +1072,7 @@
 
             <!-- Instagram -->
             <a href="https://instagram.com/3nbora" target="_blank" rel="noopener noreferrer"
-                class="link-card ripple-btn" style="--platform-color-rgb: 225, 48, 108;">
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 225, 48, 108;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-instagram"></i></div>
                     <div class="link-text">
@@ -745,8 +1084,8 @@
             </a>
 
             <!-- Facebook -->
-            <a href="YOUR_FACEBOOK_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
-                style="--platform-color-rgb: 24, 119, 242;">
+            <a href="YOUR_FACEBOOK_URL" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 24, 119, 242;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-facebook-f"></i></div>
                     <div class="link-text">
@@ -758,8 +1097,8 @@
             </a>
 
             <!-- Discord -->
-            <a href="YOUR_DISCORD_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
-                style="--platform-color-rgb: 88, 101, 242;">
+            <a href="YOUR_DISCORD_URL" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 88, 101, 242;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-discord"></i></div>
                     <div class="link-text">
@@ -771,8 +1110,8 @@
             </a>
 
             <!-- WhatsApp -->
-            <a href="YOUR_WHATSAPP_URL" target="_blank" rel="noopener noreferrer" class="link-card ripple-btn"
-                style="--platform-color-rgb: 37, 211, 102;">
+            <a href="YOUR_WHATSAPP_URL" target="_blank" rel="noopener noreferrer"
+                class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 37, 211, 102;">
                 <div class="link-content">
                     <div class="link-icon"><i class="fa-brands fa-whatsapp"></i></div>
                     <div class="link-text">
@@ -787,34 +1126,41 @@
 
         <!-- ================= FEATURED CONTENT ================= -->
         <section>
-            <h2 class="section-title">🔥 اختار مغامرتك</h2>
+            <h2 class="section-title reveal-item">🔥 اختار مغامرتك</h2>
             <div class="featured-grid">
 
-                <a href="YOUR_HIGHLIGHTS_URL" target="_blank" rel="noopener noreferrer" class="feature-card ripple-btn">
+                <a href="YOUR_HIGHLIGHTS_URL" target="_blank" rel="noopener noreferrer"
+                    class="feature-card ripple-btn interactive-card reveal-item">
                     <div class="feature-icon"><i class="fa-solid fa-crosshairs"></i></div>
-                    <h3 class="feature-title">أقوى لقطات ببجي</h3>
-                    <p class="feature-desc">Best PUBG Moments</p>
+                    <div class="feature-info-wrap">
+                        <h3 class="feature-title">أقوى لقطات ببجي</h3>
+                        <p class="feature-desc">Best PUBG Moments</p>
+                    </div>
                 </a>
 
                 <a href="YOUR_LATEST_VIDEOS_URL" target="_blank" rel="noopener noreferrer"
-                    class="feature-card ripple-btn">
+                    class="feature-card ripple-btn interactive-card reveal-item">
                     <div class="feature-icon"><i class="fa-solid fa-play"></i></div>
-                    <h3 class="feature-title">أحدث الفيديوهات</h3>
-                    <p class="feature-desc">Latest Videos</p>
+                    <div class="feature-info-wrap">
+                        <h3 class="feature-title">أحدث الفيديوهات</h3>
+                        <p class="feature-desc">Latest Videos</p>
+                    </div>
                 </a>
 
                 <a href="YOUR_PLAY_WITH_ME_URL" target="_blank" rel="noopener noreferrer"
-                    class="feature-card ripple-btn">
+                    class="feature-card ripple-btn interactive-card reveal-item">
                     <div class="feature-icon"><i class="fa-solid fa-gamepad"></i></div>
-                    <h3 class="feature-title">العب مع 3NBORA</h3>
-                    <p class="feature-desc">Play With Me</p>
+                    <div class="feature-info-wrap">
+                        <h3 class="feature-title">العب مع 3NBORA</h3>
+                        <p class="feature-desc">Play With Me</p>
+                    </div>
                 </a>
 
             </div>
         </section>
 
         <!-- ================= FOOTER ================= -->
-        <footer>
+        <footer class="reveal-item">
             <div class="footer-socials">
                 <a href="mailto:Tiger.206066@gmail.com" title="Business Email"><i class="fa-solid fa-envelope"></i></a>
                 <a href="https://tiktok.com/@3nboora" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
@@ -832,6 +1178,7 @@
 
     <!-- ================= JAVASCRIPT ================= -->
     <script>
+        // 1. زر مشاركة الصفحة
         const shareBtn = document.getElementById('shareBtn');
         shareBtn.addEventListener('click', async () => {
             const shareData = {
@@ -854,7 +1201,25 @@
             }
         });
 
-        // تحسين Ripple Effect
+        // 2. أنيميشن الظهور المتتابع عند التمرير على الموبايل (Scroll Reveal)
+        const revealElements = document.querySelectorAll('.reveal-item');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -20px 0px'
+        });
+
+        revealElements.forEach((el, index) => {
+            el.style.transitionDelay = `${Math.min(index * 0.08, 0.5)}s`;
+            revealObserver.observe(el);
+        });
+
+        // 3. تأثير الموجة (Ripple) + شرارات اللمس على الموبايل
         const buttons = document.querySelectorAll('.ripple-btn');
         buttons.forEach(btn => {
             const createRipple = function (e) {
@@ -874,6 +1239,9 @@
                     clientY = e.clientY;
                 }
 
+                // إطلاق شرارات ضوئية مكان اللمس على الشاشة
+                spawnTouchSparks(clientX, clientY);
+
                 const rect = this.getBoundingClientRect();
                 const x = clientX - rect.left;
                 const y = clientY - rect.top;
@@ -881,18 +1249,183 @@
                 const ripples = document.createElement('span');
                 ripples.style.left = x + 'px';
                 ripples.style.top = y + 'px';
+                const size = Math.max(rect.width, rect.height);
+                ripples.style.width = ripples.style.height = size * 0.35 + 'px';
                 ripples.classList.add('ripple');
 
                 this.appendChild(ripples);
 
                 setTimeout(() => {
                     ripples.remove();
-                }, 600);
+                }, 650);
             };
 
             btn.addEventListener('mousedown', createRipple);
             btn.addEventListener('touchstart', createRipple, { passive: true });
         });
+
+        // 4. تفاعل الكروت ثلاثي الأبعاد للماوس واللمس على الموبايل (Mobile Touch 3D & Glow)
+        const interactiveCards = document.querySelectorAll('.interactive-card');
+        interactiveCards.forEach(card => {
+            const handleMove = (clientX, clientY) => {
+                const rect = card.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -7;
+                const rotateY = ((x - centerX) / centerX) * 7;
+
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            };
+
+            // للكمبيوتر
+            card.addEventListener('mousemove', (e) => {
+                handleMove(e.clientX, e.clientY);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+                card.classList.remove('touch-active');
+            });
+
+            // للهاتف المحمول (Touch Events)
+            card.addEventListener('touchstart', (e) => {
+                card.classList.add('touch-active');
+                const touch = e.touches[0];
+                handleMove(touch.clientX, touch.clientY);
+            }, { passive: true });
+
+            card.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                handleMove(touch.clientX, touch.clientY);
+            }, { passive: true });
+
+            card.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    card.style.transform = '';
+                    card.classList.remove('touch-active');
+                }, 250);
+            });
+        });
+
+        // 5. كانفاس الجزيئات الخلفية + انفجار الشرارات عند لمس شاشة الموبايل
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let burstParticles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 80;
+                this.size = Math.random() * 2.5 + 0.8;
+                this.speedY = Math.random() * 1.3 + 0.4;
+                this.speedX = (Math.random() - 0.5) * 0.7;
+                this.alpha = Math.random() * 0.65 + 0.2;
+                this.color = Math.random() > 0.35 ? '229, 9, 20' : '255, 183, 3';
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -10) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = `rgba(${this.color}, 0.8)`;
+                ctx.fill();
+            }
+        }
+
+        // شرارات تنفجر عند لمس الموبايل
+        class SparkBurst {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4.5 + 1.5;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.size = Math.random() * 3 + 1.5;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.03 + 0.02;
+                this.color = Math.random() > 0.4 ? '229, 9, 20' : '255, 183, 3';
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color}, ${Math.max(this.alpha, 0)})`;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = `rgba(${this.color}, 1)`;
+                ctx.fill();
+            }
+        }
+
+        function spawnTouchSparks(x, y) {
+            for (let i = 0; i < 12; i++) {
+                burstParticles.push(new SparkBurst(x, y));
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            const count = window.innerWidth < 600 ? 30 : 45;
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particlesArray.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            for (let i = burstParticles.length - 1; i >= 0; i--) {
+                burstParticles[i].update();
+                burstParticles[i].draw();
+                if (burstParticles[i].alpha <= 0) {
+                    burstParticles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
     </script>
 </body>
 
