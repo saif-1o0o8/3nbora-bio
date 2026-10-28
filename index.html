@@ -11,7 +11,7 @@
         content="أهلاً بيك في عالم 3NBORA 🔥 كل لينكاتي ومحتوايا في مكان واحد. PUBG Mobile Creator.">
     <meta property="og:title" content="3NBORA - Link in Bio">
     <meta property="og:description" content="الروابط الرسمية لصانع المحتوى 3NBORA">
-    <meta property="og:image" content="1000269841.jpg">
+    <meta property="og:image" content="image.webp">
     <meta name="theme-color" content="#111111">
 
     <!-- Google Fonts: Tajawal -->
@@ -19,8 +19,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- FontAwesome Icons (Deferred for better Performance) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
     <style>
         /* ================= VARIABLES ================= */
@@ -92,16 +96,16 @@
             outline: none;
         }
 
-        /* ================= ANIMATIONS (MOBILE & DESKTOP) ================= */
+        /* ================= ANIMATIONS ================= */
         @keyframes float {
 
             0%,
             100% {
-                transform: translateY(0px);
+                transform: translateY(0px) translateZ(0);
             }
 
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-10px) translateZ(0);
             }
         }
 
@@ -131,11 +135,11 @@
 
         @keyframes spin-gradient {
             0% {
-                transform: rotate(0deg);
+                transform: rotate(0deg) translateZ(0);
             }
 
             100% {
-                transform: rotate(360deg);
+                transform: rotate(360deg) translateZ(0);
             }
         }
 
@@ -144,12 +148,12 @@
             0%,
             100% {
                 box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
-                transform: scale(1);
+                transform: scale(1) translateZ(0);
             }
 
             50% {
                 box-shadow: 0 0 28px rgba(229, 9, 20, 0.9), 0 0 10px rgba(255, 255, 255, 0.3);
-                transform: scale(1.03);
+                transform: scale(1.03) translateZ(0);
             }
         }
 
@@ -158,12 +162,12 @@
             0%,
             100% {
                 box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-                transform: scale(1);
+                transform: scale(1) translateZ(0);
             }
 
             50% {
                 box-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
-                transform: scale(1.02);
+                transform: scale(1.02) translateZ(0);
             }
         }
 
@@ -171,19 +175,16 @@
 
             0%,
             100% {
-                box-shadow: 0 0 12px rgba(var(--platform-color-rgb), 0.3),
-                    inset 0 0 6px rgba(var(--platform-color-rgb), 0.1);
+                box-shadow: 0 0 12px rgba(var(--platform-color-rgb), 0.3), inset 0 0 6px rgba(var(--platform-color-rgb), 0.1);
                 border-color: rgba(var(--platform-color-rgb), 0.45);
             }
 
             50% {
-                box-shadow: 0 0 28px rgba(var(--platform-color-rgb), 0.8),
-                    inset 0 0 18px rgba(var(--platform-color-rgb), 0.3);
+                box-shadow: 0 0 28px rgba(var(--platform-color-rgb), 0.8), inset 0 0 18px rgba(var(--platform-color-rgb), 0.3);
                 border-color: rgba(var(--platform-color-rgb), 0.95);
             }
         }
 
-        /* لمعان مستمر يعبر الكروت والأزرار (مهم جداً للموبايل) */
         @keyframes shine-sweep {
             0% {
                 left: -120%;
@@ -195,7 +196,6 @@
             }
         }
 
-        /* حركة تلقائية للأيقونات على الهاتف */
         @keyframes icon-wiggle {
 
             0%,
@@ -212,7 +212,6 @@
             }
         }
 
-        /* حركة ارتداد السهم لجذب الانتباه على الموبايل */
         @keyframes arrow-bounce {
 
             0%,
@@ -276,7 +275,6 @@
             }
         }
 
-        /* كلاس الظهور القوي عند التمرير على الهاتف */
         .reveal-item {
             opacity: 0;
             transform: translateY(45px) scale(0.9) rotateX(-12deg);
@@ -344,9 +342,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
         }
 
-        /* حلقة نيون دوارة حول الصورة */
         .profile-pic-container::before {
             content: '';
             position: absolute;
@@ -439,9 +438,10 @@
             width: 85%;
             max-width: 380px;
             justify-content: center;
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
         }
 
-        /* لمعان تلقائي على الأزرار */
         .btn-primary::after,
         .btn-secondary::after {
             content: '';
@@ -512,7 +512,7 @@
             transform: scale(0.92) !important;
         }
 
-        /* ================= SOCIAL LINKS (MOBILE & DESKTOP POWER ANIMATIONS) ================= */
+        /* ================= SOCIAL LINKS ================= */
         .links-section {
             display: flex;
             flex-direction: column;
@@ -531,11 +531,11 @@
             overflow: hidden;
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
             transform-style: preserve-3d;
-            will-change: transform, opacity;
+            will-change: transform, opacity, box-shadow;
+            transform: translateZ(0);
             animation: border-pulse 2.5s infinite ease-in-out, float-action 4s infinite ease-in-out;
         }
 
-        /* شعاع ضوئي تلقائي يعبر الكروت على الموبايل */
         .link-card::after {
             content: '';
             position: absolute;
@@ -550,7 +550,6 @@
             z-index: 1;
         }
 
-        /* فروق توقيت للنبض واللمعان حتى تبدو الصفحة حية وغير متكررة على الهاتف */
         .link-card:nth-child(1) {
             animation-delay: 0s, 0s;
         }
@@ -607,7 +606,6 @@
             animation-delay: 4.7s;
         }
 
-        /* إضاءة تتبع اللمس والماوس */
         .link-card::before,
         .feature-card::before {
             content: '';
@@ -644,7 +642,6 @@
             animation-play-state: paused;
         }
 
-        /* تأثير الضغط باللمس على الهاتف */
         .link-card:active {
             transform: scale(0.95) !important;
             transition: transform 0.1s ease;
@@ -772,6 +769,8 @@
             overflow: hidden;
             --platform-color-rgb: 229, 9, 20;
             border: 2px solid rgba(var(--platform-color-rgb), 0.6);
+            will-change: transform, box-shadow;
+            transform: translateZ(0);
             animation: border-pulse 2.5s infinite ease-in-out, float-action 3.5s infinite ease-in-out;
         }
 
@@ -870,7 +869,7 @@
             color: var(--text-main);
         }
 
-        /* ================= FOOTER & DEV SIGNATURE ================= */
+        /* ================= FOOTER ================= */
         footer {
             text-align: center;
             margin-top: 2rem;
@@ -906,7 +905,6 @@
             font-weight: 500;
         }
 
-        /* تنسيق اسم المطور (SX CODE) */
         .developer-name {
             color: var(--primary-red);
             font-weight: 700;
@@ -922,7 +920,6 @@
             transform: scale(1.08) translateY(-1px);
         }
 
-        /* Ripple Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -940,7 +937,7 @@
             }
         }
 
-        /* تحسينات خاصة لشاشات الموبايل */
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
             .container {
                 padding: 1.5rem 1.1rem;
@@ -990,20 +987,19 @@
 
 <body>
 
-    <!-- خلفية الجزيئات والشرارات التفاعلية -->
     <canvas id="particles-canvas"></canvas>
 
     <div class="container">
 
-        <!-- ================= HERO SECTION ================= -->
         <header class="hero reveal-item">
             <button class="share-btn" id="shareBtn" aria-label="مشاركة الصفحة">
                 <i class="fa-solid fa-share-nodes"></i>
             </button>
 
+            <!-- Layout Shift Fix & webp extension applied -->
             <div class="profile-pic-container">
-                <img src="image.jpg" alt="3NBORA Profile" class="profile-pic"
-                    onerror="this.src='https://via.placeholder.com/130?text=3NBORA'">
+                <img src="image.webp" alt="3NBORA Profile" width="135" height="135" class="profile-pic"
+                    onerror="this.src='https://via.placeholder.com/135?text=3NBORA'">
             </div>
 
             <div class="name-wrapper">
@@ -1028,9 +1024,7 @@
             </div>
         </header>
 
-        <!-- ================= SOCIAL LINKS ================= -->
         <section class="links-section">
-
             <!-- YouTube -->
             <a href="YOUR_YOUTUBE_URL" target="_blank" rel="noopener noreferrer"
                 class="link-card ripple-btn interactive-card reveal-item" style="--platform-color-rgb: 255, 0, 0;">
@@ -1121,10 +1115,8 @@
                 </div>
                 <i class="fa-solid fa-chevron-left link-arrow"></i>
             </a>
-
         </section>
 
-        <!-- ================= FEATURED CONTENT ================= -->
         <section>
             <h2 class="section-title reveal-item">🔥 اختار مغامرتك</h2>
             <div class="featured-grid">
@@ -1159,7 +1151,6 @@
             </div>
         </section>
 
-        <!-- ================= FOOTER ================= -->
         <footer class="reveal-item">
             <div class="footer-socials">
                 <a href="mailto:Tiger.206066@gmail.com" title="Business Email"><i class="fa-solid fa-envelope"></i></a>
@@ -1170,15 +1161,12 @@
             <p class="footer-text" dir="ltr">MADE WITH ❤️ FOR 3NBORA FAMILY | BY <a
                     href="https://www.facebook.com/share/1AGQipuHAd/" target="_blank" rel="noopener noreferrer"
                     class="developer-name" title="Visit Developer">SX CODE</a></p>
-
             <p class="footer-text" style="margin-top: 5px;">© 2026 3NBORA | جميع الحقوق محفوظة</p>
         </footer>
 
     </div>
 
-    <!-- ================= JAVASCRIPT ================= -->
     <script>
-        // 1. زر مشاركة الصفحة
         const shareBtn = document.getElementById('shareBtn');
         shareBtn.addEventListener('click', async () => {
             const shareData = {
@@ -1201,7 +1189,6 @@
             }
         });
 
-        // 2. أنيميشن الظهور المتتابع عند التمرير على الموبايل (Scroll Reveal)
         const revealElements = document.querySelectorAll('.reveal-item');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -1219,27 +1206,19 @@
             revealObserver.observe(el);
         });
 
-        // 3. تأثير الموجة (Ripple) + شرارات اللمس على الموبايل
         const buttons = document.querySelectorAll('.ripple-btn');
         buttons.forEach(btn => {
             const createRipple = function (e) {
-                if (e.type === 'touchstart') {
-                    this.dataset.isTouch = 'true';
-                }
-                if (e.type === 'mousedown' && this.dataset.isTouch === 'true') {
-                    return;
-                }
+                if (e.type === 'touchstart') { this.dataset.isTouch = 'true'; }
+                if (e.type === 'mousedown' && this.dataset.isTouch === 'true') { return; }
 
                 let clientX, clientY;
                 if (e.type === 'touchstart') {
-                    clientX = e.touches[0].clientX;
-                    clientY = e.touches[0].clientY;
+                    clientX = e.touches[0].clientX; clientY = e.touches[0].clientY;
                 } else {
-                    clientX = e.clientX;
-                    clientY = e.clientY;
+                    clientX = e.clientX; clientY = e.clientY;
                 }
 
-                // إطلاق شرارات ضوئية مكان اللمس على الشاشة
                 spawnTouchSparks(clientX, clientY);
 
                 const rect = this.getBoundingClientRect();
@@ -1252,19 +1231,15 @@
                 const size = Math.max(rect.width, rect.height);
                 ripples.style.width = ripples.style.height = size * 0.35 + 'px';
                 ripples.classList.add('ripple');
-
                 this.appendChild(ripples);
 
-                setTimeout(() => {
-                    ripples.remove();
-                }, 650);
+                setTimeout(() => { ripples.remove(); }, 650);
             };
 
             btn.addEventListener('mousedown', createRipple);
             btn.addEventListener('touchstart', createRipple, { passive: true });
         });
 
-        // 4. تفاعل الكروت ثلاثي الأبعاد للماوس واللمس على الموبايل (Mobile Touch 3D & Glow)
         const interactiveCards = document.querySelectorAll('.interactive-card');
         interactiveCards.forEach(card => {
             const handleMove = (clientX, clientY) => {
@@ -1279,41 +1254,29 @@
                 const centerY = rect.height / 2;
                 const rotateX = ((y - centerY) / centerY) * -7;
                 const rotateY = ((x - centerX) / centerX) * 7;
-
-                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateZ(0)`;
             };
 
-            // للكمبيوتر
-            card.addEventListener('mousemove', (e) => {
-                handleMove(e.clientX, e.clientY);
-            });
-
+            card.addEventListener('mousemove', (e) => { handleMove(e.clientX, e.clientY); });
             card.addEventListener('mouseleave', () => {
-                card.style.transform = '';
+                card.style.transform = 'translateZ(0)';
                 card.classList.remove('touch-active');
             });
 
-            // للهاتف المحمول (Touch Events)
             card.addEventListener('touchstart', (e) => {
                 card.classList.add('touch-active');
-                const touch = e.touches[0];
-                handleMove(touch.clientX, touch.clientY);
+                handleMove(e.touches[0].clientX, e.touches[0].clientY);
             }, { passive: true });
 
-            card.addEventListener('touchmove', (e) => {
-                const touch = e.touches[0];
-                handleMove(touch.clientX, touch.clientY);
-            }, { passive: true });
-
+            card.addEventListener('touchmove', (e) => { handleMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
             card.addEventListener('touchend', () => {
                 setTimeout(() => {
-                    card.style.transform = '';
+                    card.style.transform = 'translateZ(0)';
                     card.classList.remove('touch-active');
                 }, 250);
             });
         });
 
-        // 5. كانفاس الجزيئات الخلفية + انفجار الشرارات عند لمس شاشة الموبايل
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -1327,11 +1290,7 @@
         resizeCanvas();
 
         class Particle {
-            constructor() {
-                this.reset();
-                this.y = Math.random() * canvas.height;
-            }
-
+            constructor() { this.reset(); this.y = Math.random() * canvas.height; }
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = canvas.height + Math.random() * 80;
@@ -1341,15 +1300,10 @@
                 this.alpha = Math.random() * 0.65 + 0.2;
                 this.color = Math.random() > 0.35 ? '229, 9, 20' : '255, 183, 3';
             }
-
             update() {
-                this.y -= this.speedY;
-                this.x += this.speedX;
-                if (this.y < -10) {
-                    this.reset();
-                }
+                this.y -= this.speedY; this.x += this.speedX;
+                if (this.y < -10) { this.reset(); }
             }
-
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -1360,11 +1314,9 @@
             }
         }
 
-        // شرارات تنفجر عند لمس الموبايل
         class SparkBurst {
             constructor(x, y) {
-                this.x = x;
-                this.y = y;
+                this.x = x; this.y = y;
                 const angle = Math.random() * Math.PI * 2;
                 const speed = Math.random() * 4.5 + 1.5;
                 this.vx = Math.cos(angle) * speed;
@@ -1374,13 +1326,7 @@
                 this.decay = Math.random() * 0.03 + 0.02;
                 this.color = Math.random() > 0.4 ? '229, 9, 20' : '255, 183, 3';
             }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.alpha -= this.decay;
-            }
-
+            update() { this.x += this.vx; this.y += this.vy; this.alpha -= this.decay; }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -1392,35 +1338,23 @@
         }
 
         function spawnTouchSparks(x, y) {
-            for (let i = 0; i < 12; i++) {
-                burstParticles.push(new SparkBurst(x, y));
-            }
+            for (let i = 0; i < 12; i++) { burstParticles.push(new SparkBurst(x, y)); }
         }
 
         function initParticles() {
             particlesArray = [];
-            const count = window.innerWidth < 600 ? 30 : 45;
-            for (let i = 0; i < count; i++) {
-                particlesArray.push(new Particle());
-            }
+            // Mobile Particle Fix Applied here
+            const count = window.innerWidth < 600 ? 12 : 45;
+            for (let i = 0; i < count; i++) { particlesArray.push(new Particle()); }
         }
 
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particlesArray.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
+            particlesArray.forEach(p => { p.update(); p.draw(); });
             for (let i = burstParticles.length - 1; i >= 0; i--) {
-                burstParticles[i].update();
-                burstParticles[i].draw();
-                if (burstParticles[i].alpha <= 0) {
-                    burstParticles.splice(i, 1);
-                }
+                burstParticles[i].update(); burstParticles[i].draw();
+                if (burstParticles[i].alpha <= 0) { burstParticles.splice(i, 1); }
             }
-
             requestAnimationFrame(animateParticles);
         }
 
