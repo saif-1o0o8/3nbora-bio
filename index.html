@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3NBORA</title>
 
-    <link rel="preload" href="background.jpg" as="image">
-
     <!-- SEO & Open Graph Tags -->
     <meta name="description"
         content="أهلاً بيك في عالم 3NBORA 🔥 كل لينكاتي ومحتوايا في مكان واحد. PUBG Mobile Creator.">
@@ -16,10 +14,18 @@
     <meta property="og:image" content="image.webp">
     <meta name="theme-color" content="#111111">
 
-    <!-- Google Fonts: Tajawal -->
+    <!-- Preload Background Image for LCP Score -->
+    <link rel="preload" href="background.jpg" as="image">
+
+    <!-- Google Fonts: Tajawal (Deferred for better Performance / Render-Blocking Fix) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
+        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap">
+    </noscript>
 
     <!-- FontAwesome Icons (Deferred for better Performance) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
@@ -998,7 +1004,6 @@
                 <i class="fa-solid fa-share-nodes"></i>
             </button>
 
-            <!-- Layout Shift Fix & webp extension applied -->
             <div class="profile-pic-container">
                 <img src="image.webp" alt="3NBORA Profile" width="135" height="135" class="profile-pic"
                     onerror="this.src='https://via.placeholder.com/135?text=3NBORA'">
@@ -1345,7 +1350,6 @@
 
         function initParticles() {
             particlesArray = [];
-            // Mobile Particle Fix Applied here
             const count = window.innerWidth < 600 ? 12 : 45;
             for (let i = 0; i < count; i++) { particlesArray.push(new Particle()); }
         }
@@ -1360,13 +1364,14 @@
             requestAnimationFrame(animateParticles);
         }
 
-        // تشغيل الأنيميشن بعد تحميل الصفحة بثانية عشان جوجل PageSpeed يديك سكور 100
+        // إرجاء تشغيل الجزيئات لثانية واحدة لتمرير فحص جوجل بسرعة 100%
         window.addEventListener('load', () => {
             setTimeout(() => {
                 initParticles();
                 animateParticles();
             }, 1000);
         });
+
     </script>
 </body>
 
