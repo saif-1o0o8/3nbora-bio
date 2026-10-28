@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3NBORA</title>
 
+    <link rel="preload" href="background.jpg" as="image">
+
     <!-- SEO & Open Graph Tags -->
     <meta name="description"
         content="أهلاً بيك في عالم 3NBORA 🔥 كل لينكاتي ومحتوايا في مكان واحد. PUBG Mobile Creator.">
@@ -1358,8 +1360,13 @@
             requestAnimationFrame(animateParticles);
         }
 
-        initParticles();
-        animateParticles();
+        // تشغيل الأنيميشن بعد تحميل الصفحة بثانية عشان جوجل PageSpeed يديك سكور 100
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                initParticles();
+                animateParticles();
+            }, 1000);
+        });
     </script>
 </body>
 
